@@ -272,14 +272,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: Student care supervisor
+**Target user profile**: Student Care Supervisor
 
-* has a need to manage a significant number of contacts
+* needs to manage a significant number of contacts
 * can type fast
 * prefers typing to mouse interactions
 * prefers CLI to GUI
 
-**Value proposition**: Provides a fast and reliable way to retrieve parents' contact details, edit and record details with minimal effort. Optimized for users who are comfortable typing and prefers CLI to GUI
+**Value proposition**: Provides a fast and reliable way to retrieve parents' contact details, edit and record student details with minimal effort. Optimized for users who are comfortable typing and prefers CLI to GUI
 
 
 ### User stories
@@ -295,21 +295,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | scroll to find a contact                                   | view the person’s contact information                                    |
 | `* *`    | user                                       | search for a parent’s name or a student’s name             | find the contact if I only remember one of their names                   |
 | `* *`    | user                                       | add dietary information about a student to a contact       | easily find the information via the address book                         |
-| `* *`    | user                                       | add pictures to contacts                                   | remember their faces                                                     |
 | `* *`    | user                                       | sort contacts by age                                       | easily know if there are missing people from each batch                  |
 | `* *`    | user                                       | mark the attendance of each student                        | keep track of who is absent during class                                 |
 | `* *`    | user                                       | update a parent's contact information                      | make changes to their phone number/address                               |
 | `* *`    | user                                       | mass delete contacts                                       | quickly remove multiple irrelevant contact information in one go         |
 | `* *`    | user                                       | archive contact information                                | preserve contact information, while not being able to actively view it   |
-| `* *`    | user                                       | see at a glance which students have allergies              | send them to buy their own meals                                         |
-| `* *`    | user                                       | associate pictures to student’s names                      | quickly inform teachers when parents contact me                          |
+| `* *`    | user                                       | see at a glance which students have allergies              | ensure they avoid unsafe foods                                           |
+| `* *`    | user                                       | associate pictures with students                           | quickly recognize them                                                   |
 | `* *`    | user                                       | mark which students have completed their homework          | keep track of which students have not completed their homework           |
 | `* *`    | user                                       | access student behaviour notes                             | respond appropriately to behavioural issues                              |
 | `* *`    | user                                       | group students by classroom                                | ensure only relevant teachers can access their information               |
 | `* *`    | user                                       | group classrooms by year/batch                             | archive graduated students easily                                        |
 | `* *`    | user                                       | associate a teacher with classroom(s)                      | grant them access to multiple student data at once                       |
 | `*`      | user                                       | filter by classroom or year                                | show only relevant students in the list                                  |
-| `*`      | user                                       | summarize the number of each dietary restrictions          | plan meals easier                                                        |
+| `*`      | user                                       | summarize the number of each dietary restrictions          | plan meals more easily                                                   |
 | `*`      | user                                       | get notifications at dismissal times                       | dismiss students at the correct timings                                  |
 
 *{More to be added}*
@@ -322,7 +321,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Student Care Supervisor requests for a student and the student’s information to be stored for later reference.
+1.  Student Care Supervisor requests to add a student with their information.
 2.  CareContacts stores the student and the information related to the student.
 3.  CareContacts displays a success message confirming the student has been stored.
 
@@ -347,9 +346,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Student Care Supervisor requests for a student and the information related to the student to not be stored in the system.
-2.  CareContacts deletes the student with the corresponding index number.
-3.  CareContacts display deletion success message.
+1.  Student Care Supervisor requests to delete a student using the index.
+2.  CareContacts deletes the student.
+3.  CareContacts displays a deletion success message.
 
 
     Use case ends.
@@ -361,6 +360,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. CareContacts displays an error message.
 
       Use case ends.
+
+* 1b. The given student index does not exist.
+
+    * 1b1. CareContacts displays an error message.
+
+      Use case ends.
+
 
 **Use case: UC3 - List all student information**
 
@@ -376,8 +382,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Student Care Supervisor requests for information on available commands.
-2.  CareContacts displays information on available commands, parameters and formats.
+1.  Student Care Supervisor requests for information on the available commands.
+2.  CareContacts displays information on the available commands, parameters and formats.
 
 
 
@@ -403,10 +409,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Invalid command format**: A command format that does not adhere to the format prescribed by the UI
-* **Student care**: An afterschool program for primary-school aged children
-* **Student care supervisor**: A student care supervisor that manages the daily operations and staff of the student care center
-* **Student**: A child enrolled in the student care center
+* **Student Care Center**: An afterschool program for primary-school aged children
+* **Student Care Supervisor**: A staff member responsible for managing the daily operations and staff of the student care center
+* **Student**: A child enrolled in the student care center whose information is stored in CareContacts.
 
 --------------------------------------------------------------------------------------------------------------------
 
