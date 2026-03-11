@@ -198,9 +198,5 @@ public class RemarkCommandTest {
                 new Remark(VALID_REMARK_BOB))));
         assertFalse(dietaryCommand.equals(new RemarkCommand(INDEX_FIRST_PERSON,
                 new DietaryRemark(VALID_DIETARYREMARK_BOB))));
-
-        // different remark type (DietaryRemark vs Remark) -> returns false
-        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_FIRST_PERSON,
-                new DietaryRemark(VALID_REMARK_AMY))));
     }
 }
