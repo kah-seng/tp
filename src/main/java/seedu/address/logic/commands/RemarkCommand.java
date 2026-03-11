@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIETARY_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -11,6 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.remarks.DietaryRemark;
 import seedu.address.model.person.remarks.Remark;
 
 /**
@@ -24,7 +26,8 @@ public class RemarkCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing remark will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_REMARK + "[REMARK]\n"
+            + PREFIX_REMARK + "[REMARK] or "
+            + PREFIX_DIETARY_REMARK + "[DIETARY REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_REMARK + "Likes to swim.";
 
@@ -53,8 +56,17 @@ public class RemarkCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        Remark updatedRemark = personToEdit.getRemark();
+        DietaryRemark updatedDietaryRemark = personToEdit.getDietaryRemark();
+
+        if (this.remark instanceof DietaryRemark) {
+            updatedDietaryRemark = (DietaryRemark) this.remark;
+        } else {
+            updatedRemark = this.remark;
+        }
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), remark, personToEdit.getTags());
+                personToEdit.getAddress(), updatedRemark, updatedDietaryRemark, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.remarks.DietaryRemark;
 import seedu.address.model.person.remarks.Remark;
 import seedu.address.model.tag.Tag;
 
@@ -25,18 +26,20 @@ public class Person {
     // Data fields
     private final Address address;
     private final Remark remark;
+    private final DietaryRemark dietaryRemark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, DietaryRemark dietaryRemark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
+        this.dietaryRemark = dietaryRemark;
         this.tags.addAll(tags);
     }
 
@@ -58,6 +61,10 @@ public class Person {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public DietaryRemark getDietaryRemark() {
+        return dietaryRemark;
     }
 
     /**

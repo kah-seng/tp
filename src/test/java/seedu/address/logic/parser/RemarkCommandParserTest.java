@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIETARY_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -10,11 +11,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.model.person.remarks.DietaryRemark;
 import seedu.address.model.person.remarks.Remark;
 
 public class RemarkCommandParserTest {
     private RemarkCommandParser parser = new RemarkCommandParser();
     private final String nonEmptyRemark = "Some remark.";
+    private final String nonEmptyDietaryRemark = "Some dietary remark.";
 
     @Test
     public void parse_indexSpecified_success() {
@@ -27,6 +30,16 @@ public class RemarkCommandParserTest {
         // no remark
         userInput = targetIndex.getOneBased() + " " + PREFIX_REMARK;
         expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(""));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // have dietary remark
+        userInput = targetIndex.getOneBased() + " " + PREFIX_DIETARY_REMARK + nonEmptyDietaryRemark;
+        expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new DietaryRemark(nonEmptyDietaryRemark));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // no dietary remark (simulating the delete action)
+        userInput = targetIndex.getOneBased() + " " + PREFIX_DIETARY_REMARK;
+        expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new DietaryRemark(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

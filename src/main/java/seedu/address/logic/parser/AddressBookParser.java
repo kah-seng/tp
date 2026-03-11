@@ -19,6 +19,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.remarks.DietaryRemark;
 
 /**
  * Parses user input.

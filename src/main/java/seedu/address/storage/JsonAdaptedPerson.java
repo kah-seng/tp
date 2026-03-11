@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.remarks.DietaryRemark;
 import seedu.address.model.person.remarks.Remark;
 import seedu.address.model.tag.Tag;
 
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String remark;
+    private final String dietaryRemark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,12 +40,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("remark") String remark, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("remark") String remark, @JsonProperty("dietaryRemark") String dietaryRemark,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
+        this.dietaryRemark = dietaryRemark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -58,6 +62,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         remark = source.getRemark().value;
+        dietaryRemark = source.getDietaryRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -111,8 +116,13 @@ class JsonAdaptedPerson {
         }
         final Remark modelRemark = new Remark(remark);
 
+        if (dietaryRemark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DietaryRemark.class.getSimpleName()));
+        }
+        final DietaryRemark modelDietaryRemark = new DietaryRemark(dietaryRemark);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelDietaryRemark, modelTags);
     }
 
 }

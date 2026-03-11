@@ -10,7 +10,9 @@ public class Remark {
     public final String value;
 
     /**
-     * Every field must be present and not null.
+     * Constructs an {@code Remark}.
+     *
+     * @param remark A valid remark.
      */
     public Remark(String remark) {
         requireNonNull(remark);
