@@ -7,11 +7,11 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
-    "parentName": "Parent Bee",
-    "parentPhone": "98765432",
-    "parentEmail": "parent@gmail.com",
-    "remark" : "",
-    "dietaryRemark" : ""
+    "parentName": "Benny Meier",
+    "parentPhone": "98769876",
+    "parentEmail": "email@email.com",
+    "remark" : "She likes aardvarks.",
+    "dietaryRemark" : "Fish"
   }, {
     "name" : "Benson Meier",
     "age" : "11",
@@ -19,11 +19,11 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "parentName": "Parent Bee",
-    "parentPhone": "98765432",
-    "parentEmail": "parent@gmail.com",
-    "remark" : "",
-    "dietaryRemark" : ""
+    "parentName": "Benny Meier",
+    "parentPhone": "98769876",
+    "parentEmail": "email@mail.com",
+    "remark" : "He can't take beer!",
+    "dietaryRemark" : "Shrimp"
   }, {
     "name" : "Carl Kurz",
     "age" : "13",

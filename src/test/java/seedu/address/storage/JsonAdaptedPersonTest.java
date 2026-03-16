@@ -124,7 +124,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_AGE, VALID_PHONE, null, VALID_ADDRESS, VALID_TAGS,
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_AGE, VALID_PHONE, null,
+                VALID_ADDRESS, VALID_TAGS,
                 VALID_PARENT_NAME, VALID_PARENT_PHONE, VALID_PARENT_EMAIL,
                 VALID_REMARK, VALID_DIETARY_REMARK);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
