@@ -21,8 +21,6 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Age age;
-    private final Phone phone;
-    private final Email email;
 
     // Data fields
     private final Address address;
@@ -38,13 +36,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Age age, Phone phone, Email email, Address address, Set<Tag> tags, Name parentName,
+    public Person(Name name, Age age, Address address, Set<Tag> tags, Name parentName,
                   Phone parentPhone, Email parentEmail, Remark remark, DietaryRemark dietaryRemark) {
-        requireAllNonNull(name, phone, email, address, tags, parentName, parentPhone, parentEmail);
+        requireAllNonNull(name, address, tags, parentName, parentPhone, parentEmail);
         this.name = name;
         this.age = age;
-        this.phone = phone;
-        this.email = email;
         this.address = address;
         this.remark = remark;
         this.dietaryRemark = dietaryRemark;
@@ -60,14 +56,6 @@ public class Person {
 
     public Name getName() {
         return name;
-    }
-
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public Email getEmail() {
-        return email;
     }
 
     public Address getAddress() {
@@ -133,8 +121,6 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && age.equals(otherPerson.age)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && parentName.equals(otherPerson.parentName)
@@ -145,7 +131,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, age, phone, email, address, tags, parentName, parentPhone, parentEmail);
+        return Objects.hash(name, age, address, tags, parentName, parentPhone, parentEmail);
     }
 
     @Override
@@ -153,8 +139,6 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("age", age)
-                .add("phone", phone)
-                .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
                 .add("parentName", parentName)

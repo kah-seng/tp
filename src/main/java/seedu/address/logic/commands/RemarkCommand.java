@@ -66,7 +66,6 @@ public class RemarkCommand extends Command {
         }
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getAge(),
-                personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), personToEdit.getParentName(),
                 personToEdit.getParentPhone(), personToEdit.getParentEmail(),
                 updatedRemark, updatedDietaryRemark);

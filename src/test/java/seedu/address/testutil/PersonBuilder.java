@@ -21,8 +21,6 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_AGE = "10";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PARENT_NAME = "Parent Bee";
     public static final String DEFAULT_PARENT_PHONE = "98765432";
@@ -32,8 +30,6 @@ public class PersonBuilder {
 
     private Name name;
     private Age age;
-    private Phone phone;
-    private Email email;
     private Address address;
     private Remark remark;
     private DietaryRemark dietaryRemark;
@@ -48,8 +44,6 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         age = new Age(DEFAULT_AGE);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
         dietaryRemark = new DietaryRemark(DEFAULT_DIETARYREMARK);
@@ -65,8 +59,6 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         age = personToCopy.getAge();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
         dietaryRemark = personToCopy.getDietaryRemark();
@@ -105,22 +97,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withAddress(String address) {
         this.address = new Address(address);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
         return this;
     }
 
@@ -170,9 +146,7 @@ public class PersonBuilder {
      * @return A new instance of {@code Person}.
      */
     public Person build() {
-        return new Person(name, age, phone, email, address, tags,
-                parentName, parentPhone, parentEmail,
-                remark, dietaryRemark);
+        return new Person(name, age, address, tags, parentName, parentPhone, parentEmail, remark, dietaryRemark);
     }
 
 }
