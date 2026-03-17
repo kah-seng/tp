@@ -7,12 +7,16 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.model.person.remarks.DietaryRemark;
 import seedu.address.model.person.remarks.Remark;
+
 
 public class RemarkCommandParserTest {
     private RemarkCommandParser parser = new RemarkCommandParser();
@@ -24,22 +28,26 @@ public class RemarkCommandParserTest {
         // have remark
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_REMARK + nonEmptyRemark;
-        RemarkCommand expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(nonEmptyRemark));
+        RemarkCommand expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON,
+                new ArrayList<>(Arrays.asList(new Remark(nonEmptyRemark))));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // no remark
         userInput = targetIndex.getOneBased() + " " + PREFIX_REMARK;
-        expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(""));
+        expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON,
+                new ArrayList<>(Arrays.asList(new Remark(""))));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // have dietary remark
         userInput = targetIndex.getOneBased() + " " + PREFIX_DIETARY_REMARK + nonEmptyDietaryRemark;
-        expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new DietaryRemark(nonEmptyDietaryRemark));
+        expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON,
+                new ArrayList<>(Arrays.asList(new DietaryRemark(nonEmptyDietaryRemark))));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // no dietary remark (simulating the delete action)
         userInput = targetIndex.getOneBased() + " " + PREFIX_DIETARY_REMARK;
-        expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new DietaryRemark(""));
+        expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON,
+                new ArrayList<>(Arrays.asList(new DietaryRemark(""))));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

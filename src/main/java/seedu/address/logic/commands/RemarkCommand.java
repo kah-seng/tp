@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIETARY_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -85,17 +86,21 @@ public class RemarkCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String remarkMessage = "";
-        String dietaryRemarkMessage = "";
+        List<String> messages = new ArrayList<>();
+
         for (Remark remark : remarks) {
             if (remark instanceof DietaryRemark) {
-                dietaryRemarkMessage = !remark.value.isEmpty() ?
-                        MESSAGE_ADD_DIETARY_REMARK_SUCCESS : MESSAGE_DELETE_DIETARY_REMARK_SUCCESS;
+                messages.add(remark.value.isEmpty()
+                        ? MESSAGE_DELETE_DIETARY_REMARK_SUCCESS
+                        : MESSAGE_ADD_DIETARY_REMARK_SUCCESS);
             } else {
-                remarkMessage = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
+                messages.add(remark.value.isEmpty()
+                        ? MESSAGE_DELETE_REMARK_SUCCESS
+                        : MESSAGE_ADD_REMARK_SUCCESS);
             }
         }
-        String message = remarkMessage + "\n" + dietaryRemarkMessage;
+
+        String message = String.join("\n", messages);
         return String.format(message, Messages.format(personToEdit));
     }
 

@@ -5,6 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIETARY_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.RemarkCommand;
@@ -12,8 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.remarks.DietaryRemark;
 import seedu.address.model.person.remarks.Remark;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object

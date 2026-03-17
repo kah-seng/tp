@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -98,7 +99,7 @@ public class AddressBookParserTest {
         final Remark remark = new Remark("Some remark.");
         RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_REMARK + remark.value);
-        assertEquals(new RemarkCommand(INDEX_FIRST_PERSON, remark), command);
+        assertEquals(new RemarkCommand(INDEX_FIRST_PERSON, new ArrayList<>(Arrays.asList(remark))), command);
     }
 
     @Test
@@ -106,7 +107,7 @@ public class AddressBookParserTest {
         final DietaryRemark dietaryRemark = new DietaryRemark("Some dietary remark.");
         RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DIETARY_REMARK + dietaryRemark.value);
-        assertEquals(new RemarkCommand(INDEX_FIRST_PERSON, dietaryRemark), command);
+        assertEquals(new RemarkCommand(INDEX_FIRST_PERSON, new ArrayList<>(Arrays.asList(dietaryRemark))), command);
     }
 
     @Test
