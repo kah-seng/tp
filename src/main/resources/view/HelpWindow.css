@@ -43,3 +43,12 @@
 .example-box {
     -fx-background-color: #D3D3D3;
 }
+
+.nav-panel {
+    -fx-padding: 10;
+    -fx-background-color: #f5f5f5;
+}
+
+.hyperlink {
+    -fx-text-fill: #3366cc;
+}

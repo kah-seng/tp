@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ScrollPane?>
@@ -24,7 +25,19 @@
 
       <VBox fx:id="helpMessageContainer">
         <children>
-          <ScrollPane fitToWidth="true">
+          <VBox spacing="8" styleClass="nav-panel">
+
+            <VBox spacing="2">
+              <Hyperlink text="Add" onAction="#goToAdd"/>
+              <Hyperlink text="Delete" onAction="#goToDelete"/>
+              <Hyperlink text="List" onAction="#goToList"/>
+              <Hyperlink text="Add remark" onAction="#goToAddRemark"/>
+              <Hyperlink text="Delete remark" onAction="#goToDeleteRemark"/>
+              <Hyperlink text="Find by student" onAction="#goToFindStudent"/>
+              <Hyperlink text="Find by parent" onAction="#goToFindParent"/>
+            </VBox>
+          </VBox>
+          <ScrollPane fitToWidth="true" fx:id="scrollPane">
             <content>
               <VBox spacing="6">
                 <padding>
@@ -32,10 +45,9 @@
                 </padding>
                 <Label text="Getting Started" styleClass="help-title"/>
 
-
                 <Separator/>
 
-                <Label text="Add a student" styleClass="help-section"/>
+                <Label fx:id="addSection" text="Add a student" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
                 <Label text="add n/STUDENT_NAME pn/PARENT_NAME pc/PARENT_PHONE pe/PARENT_EMAIL a/ADDRESS" styleClass="help-command" wrapText="True"/>
                 <Label text="Examples:" styleClass="help-subtitle"/>
@@ -50,7 +62,7 @@
 
                 <Separator/>
 
-                <Label text="Delete a student" styleClass="help-section"/>
+                <Label fx:id="deleteSection" text="Delete a student" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
                 <Label text="delete INDEX" styleClass="help-command"/>
                 <Label text="Examples:" styleClass="help-subtitle"/>
@@ -64,7 +76,7 @@
 
                 <Separator/>
 
-                <Label text="Add a remark on a student" styleClass="help-section"/>
+                <Label fx:id="addRemarkSection" text="Add a remark on a student" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
                 <Label text="remark INDEX r/GENERAL_REMARK d/DIETARY_INFORMATION" styleClass="help-command"/>
                 <Label text="Examples:" styleClass="help-subtitle"/>
@@ -79,7 +91,7 @@
 
                 <Separator/>
 
-                <Label text="Delete a remark on a student" styleClass="help-section"/>
+                <Label fx:id="deleteRemarkSection" text="Delete a remark on a student" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
                 <Label text="delete INDEX r/ d/" styleClass="help-command"/>
                 <Label text="Examples:" styleClass="help-subtitle"/>
@@ -100,7 +112,7 @@
 
                 <Separator/>
 
-                <Label text="Find by student name" styleClass="help-section"/>
+                <Label fx:id="findStudent" text="Find by student name" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
                 <Label text="find n/STUDENT_NAME" styleClass="help-command"/>
                 <Label text="Examples:" styleClass="help-subtitle"/>
@@ -114,7 +126,7 @@
 
                 <Separator/>
 
-                <Label text="Find by parent name" styleClass="help-section"/>
+                <Label fx:id="findParent" text="Find by parent name" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
                 <Label text="find pn/PARENT_NAME" styleClass="help-command"/>
                 <VBox spacing="2" styleClass="example-box">
