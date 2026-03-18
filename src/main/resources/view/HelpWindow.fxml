@@ -116,7 +116,7 @@
 
                 <Label text="Find by parent name" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
-                <Label text="find n/PARENT_NAME" styleClass="help-command"/>
+                <Label text="find pn/PARENT_NAME" styleClass="help-command"/>
                 <VBox spacing="2" styleClass="example-box">
                   <padding>
                     <Insets top="15" right="15" bottom="15" left="15"/>
