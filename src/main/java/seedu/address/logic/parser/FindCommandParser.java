@@ -31,10 +31,10 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Array of all prefixes that the FindCommand can search by.
      */
     private static final Prefix[] ALLOWED_PREFIXES = {
-            PREFIX_NAME, PREFIX_ADDRESS, PREFIX_AGE, PREFIX_TAG,
-            PREFIX_REMARK, PREFIX_DIETARY_REMARK, PREFIX_CLASS_REMARK,
-            PREFIX_BEHAVIOR_REMARK, PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE,
-            PREFIX_PARENT_EMAIL
+        PREFIX_NAME, PREFIX_ADDRESS, PREFIX_AGE, PREFIX_TAG,
+        PREFIX_REMARK, PREFIX_DIETARY_REMARK, PREFIX_CLASS_REMARK,
+        PREFIX_BEHAVIOR_REMARK, PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE,
+        PREFIX_PARENT_EMAIL
     };
 
     /**
