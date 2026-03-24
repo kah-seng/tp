@@ -1,14 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.Map;
-import java.util.HashMap;
-
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.Prefix;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEHAVIOR_REMARK;
@@ -20,6 +11,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.Prefix;
 
 /**
  * Tests that a {@code Person}'s attributes match any of the keywords given for specified prefixes.
