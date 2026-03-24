@@ -67,16 +67,36 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
      * Helper method to map a Prefix to a specific field in the Person object.
      */
     private String getFieldByPrefix(Prefix prefix, Person person) {
-        if (prefix.equals(PREFIX_NAME)) return person.getName().fullName;
-        if (prefix.equals(PREFIX_AGE)) return person.getAge().value;
-        if (prefix.equals(PREFIX_ADDRESS)) return person.getAddress().value;
-        if (prefix.equals(PREFIX_PARENT_NAME)) return person.getParentName().fullName;
-        if (prefix.equals(PREFIX_PARENT_PHONE)) return person.getParentPhone().value;
-        if (prefix.equals(PREFIX_PARENT_EMAIL)) return person.getParentEmail().value;
-        if (prefix.equals(PREFIX_REMARK)) return person.getRemark().value;
-        if (prefix.equals(PREFIX_DIETARY_REMARK)) return person.getDietaryRemark().value;
-        if (prefix.equals(PREFIX_CLASS_REMARK)) return person.getClassRemark().value;
-        if (prefix.equals(PREFIX_BEHAVIOR_REMARK)) return person.getBehaviorRemark().value;
+        if (prefix.equals(PREFIX_NAME)) {
+            return person.getName().fullName;
+        }
+        if (prefix.equals(PREFIX_AGE)) {
+            return person.getAge().value;
+        }
+        if (prefix.equals(PREFIX_ADDRESS)) {
+            return person.getAddress().value;
+        }
+        if (prefix.equals(PREFIX_PARENT_NAME)) {
+            return person.getParentName().fullName;
+        }
+        if (prefix.equals(PREFIX_PARENT_PHONE)) {
+            return person.getParentPhone().value;
+        }
+        if (prefix.equals(PREFIX_PARENT_EMAIL)) {
+            return person.getParentEmail().value;
+        }
+        if (prefix.equals(PREFIX_REMARK)) {
+            return person.getRemark().value;
+        }
+        if (prefix.equals(PREFIX_DIETARY_REMARK)) {
+            return person.getDietaryRemark().value;
+        }
+        if (prefix.equals(PREFIX_CLASS_REMARK)) {
+            return person.getClassRemark().value;
+        }
+        if (prefix.equals(PREFIX_BEHAVIOR_REMARK)) {
+            return person.getBehaviorRemark().value;
+        }
 
         if (prefix.equals(PREFIX_TAG)) {
             return person.getTags().stream()
