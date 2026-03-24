@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -48,4 +49,14 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats a list of persons for display to the user
+     * @param persons
+     * @return
+     */
+    public static String formatPersonList(List<Person> persons) {
+        return persons.stream()
+                .map(Messages::format)
+                .collect(Collectors.joining("\n"));
+    }
 }
