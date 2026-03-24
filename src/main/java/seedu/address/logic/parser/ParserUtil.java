@@ -24,7 +24,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_INDEX_RANGE = "Index range is not a range of non-zero unsigned integers.";
+    public static final String MESSAGE_INVALID_INDEX_RANGE =
+            "Index range must be in the format START-END (e.g. 1-3),\n"
+                    + "where both are positive integers and the start is less than or equal to the end.";
     public static final String RANGE_SEPARATOR = "-";
     public static final String WHITESPACE_REGEX = "\\s+";
 

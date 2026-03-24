@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -31,6 +32,17 @@ public class DeleteCommand extends Command {
 
     private final List<Index> targetIndices;
 
+    /**
+     * Constructs a {@code DeleteCommand} with the given {@code targetIndices}.
+     * <p>
+     * The provided list of indices is deduplicated (to prevent multiple deletions of the same
+     * person) and sorted in ascending order. Sorting ensures consistent internal state and
+     * predictable behavior during execution and testing.
+     * </p>
+     *
+     * @param targetIndices The indices of the persons in the filtered person list to be deleted.
+     * @throws NullPointerException if {@code targetIndices} is null.
+     */
     public DeleteCommand(List<Index> targetIndices) {
         requireNonNull(targetIndices);
         assert !targetIndices.isEmpty();
