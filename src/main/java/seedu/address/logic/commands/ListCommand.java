@@ -19,7 +19,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons, sorted by: ";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists your contacts, and optionally sorts. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists your contacts. Sorts by the specified parameter if provided."
             + "Use at most one of the following parameters: "
             + PREFIX_NAME + " | "
             + PREFIX_AGE + " | "
