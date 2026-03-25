@@ -76,6 +76,16 @@
                 <Label fx:id="remarkSection" text="Remark" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
                 <Label wrapText="true" text="remark INDEX r/GENERAL_REMARK d/DIETARY_INFORMATION c/CLASS_INFORMATION b/BEHAVIORAL_INFORMATION" styleClass="help-command"/>
+
+                <Label text="Description:" styleClass="help-subtitle"/>
+                <Label wrapText="true" text="Adds or updates remark fields for the student at the specified index." />
+
+                <Label text="Notes:" styleClass="help-subtitle"/>
+                <Label text="- You must provide at least one prefix (r/, d/, c/, or b/)." wrapText="true"/>
+                <Label text="- Multiple prefixes can be used to update multiple fields at the same time." wrapText="true"/>
+                <Label text="- Existing remarks will be overwritten by the new values." wrapText="true"/>
+                <Label text="- To delete a remark, use the prefix with no value (e.g. remark 1 r/)." wrapText="true"/>
+
                 <Label text="Examples:" styleClass="help-subtitle"/>
                 <VBox spacing="2" styleClass="example-box">
                   <padding>
@@ -93,6 +103,16 @@
                 <Label text="Lists all students. If a prefix is provided, the list is sorted by that field." />
                 <Label text="Command:" styleClass="help-subtitle"/>
                 <Label text="list [PREFIX]" styleClass="help-command"/>
+
+                <Label text="Description:" styleClass="help-subtitle"/>
+                <Label text="Displays all students. If a prefix is provided, the list is sorted by that field." wrapText="true"/>
+
+                <Label text="Notes:" styleClass="help-subtitle"/>
+                <Label text="- If no prefix is given, students are shown in the default order." wrapText="true"/>
+                <Label text="- Only one prefix can be used at a time." wrapText="true"/>
+                <Label text="- Sorting is done in ascending order." wrapText="true"/>
+                <Label text="- Supported prefixes include n/, pn/, ag/, etc." wrapText="true"/>
+
                 <Label text="Examples:" styleClass="help-subtitle"/>
                 <VBox spacing="2" styleClass="example-box">
                   <padding>
@@ -108,13 +128,22 @@
                 <Label fx:id="findSection" text="Find" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
                 <Label text="find PREFIX/KEYWORD" styleClass="help-command"/>
+
+                <Label text="Description:" styleClass="help-subtitle"/>
+                <Label text="Filters contacts by one or more fields. Returns contacts that match ANY of the given keywords (OR search)." wrapText="true"/>
+
+                <Label text="Notes:" styleClass="help-subtitle"/>
+                <Label text="- Multiple parameters can be used (e.g. n/, a/, pn/, pe/)." wrapText="true"/>
+                <Label text="- Matches are case-insensitive." wrapText="true"/>
+                <Label text="- A contact is shown if it matches at least one condition." wrapText="true"/>
+
                 <Label text="Examples:" styleClass="help-subtitle"/>
                 <VBox spacing="2" styleClass="example-box">
                   <padding>
                     <Insets top="15" right="15" bottom="15" left="15"/>
                   </padding>
                   <Label text="find n/Jane"/>
-                  <Label text="find pn/Jane Doe"/>
+                  <Label text="find pn/Jane Doe n/Jane"/>
                   <Label text="find a/11"/>
                 </VBox>
 
