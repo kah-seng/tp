@@ -110,7 +110,7 @@
                 <Label text="- If no prefix is given, students are shown in the default order." wrapText="true"/>
                 <Label text="- Only one prefix can be used at a time." wrapText="true"/>
                 <Label text="- Sorting is done in ascending order." wrapText="true"/>
-                <Label text="- Supported prefixes include n/, pn/, ag/, etc." wrapText="true"/>
+                <Label text="- Supported prefixes include n/, pn/, a/, etc." wrapText="true"/>
 
                 <Label text="Examples:" styleClass="help-subtitle"/>
                 <VBox spacing="2" styleClass="example-box">
@@ -119,7 +119,7 @@
                   </padding>
                   <Label text="1. list n/"/>
                   <Label text="2. list pn/"/>
-                  <Label text="3. list ag/"/>
+                  <Label text="3. list a/"/>
                 </VBox>
 
                 <Separator/>
