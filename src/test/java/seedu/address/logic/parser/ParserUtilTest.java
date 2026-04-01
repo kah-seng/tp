@@ -39,7 +39,7 @@ public class ParserUtilTest {
     private static final String VALID_AGE = "21";
 
     private static final String WHITESPACE = " \t\r\n";
-    
+
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
