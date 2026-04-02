@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.Prefix;
 
@@ -63,10 +62,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
             return keywords.stream().anyMatch(keyword -> {
                 // Exact match for Age to avoid "1" matching "12"
                 if (prefix.equals(PREFIX_AGE)) {
-                    return fieldValue.equals(keyword);
+                    return fieldToSearch.equals(keyword);
                 }
 
-                return fieldValue.toLowerCase().contains(keyword.toLowerCase());
+                return fieldToSearch.toLowerCase().contains(keyword.toLowerCase());
             });
         });
     }
