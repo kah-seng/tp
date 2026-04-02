@@ -87,9 +87,9 @@ public class NameContainsKeywordsPredicateTest {
                 .withBehaviorRemark("B1").withTags("T1").build();
 
         Prefix[] prefixes = {
-                PREFIX_NAME, PREFIX_AGE, PREFIX_ADDRESS, PREFIX_PARENT_NAME,
-                PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL, PREFIX_REMARK,
-                PREFIX_DIETARY_REMARK, PREFIX_CLASS_REMARK, PREFIX_BEHAVIOR_REMARK, PREFIX_TAG
+            PREFIX_NAME, PREFIX_AGE, PREFIX_ADDRESS, PREFIX_PARENT_NAME,
+            PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL, PREFIX_REMARK,
+            PREFIX_DIETARY_REMARK, PREFIX_CLASS_REMARK, PREFIX_BEHAVIOR_REMARK, PREFIX_TAG
         };
 
         for (Prefix p : prefixes) {
