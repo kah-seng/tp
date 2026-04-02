@@ -60,11 +60,21 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
             List<String> keywords = entry.getValue();
             String fieldToSearch = getFieldByPrefix(prefix, person);
 
-            return keywords.stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(fieldToSearch, keyword));
+            return keywords.stream().anyMatch(keyword -> {
+                // Exact match for Age to avoid "1" matching "12"
+                if (prefix.equals(PREFIX_AGE)) {
+                    return fieldValue.equals(keyword);
+                }
+
+                return fieldValue.toLowerCase().contains(keyword.toLowerCase());
+            });
         });
     }
 
+    /**
+     * Helper method to extract the string value of a specific field from a Person
+     * based on the provided Prefix.
+     */
     private String getFieldByPrefix(Prefix prefix, Person person) {
         if (prefix.equals(PREFIX_NAME)) {
             return person.getName().fullName;
