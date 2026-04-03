@@ -15,6 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.model.person.remarks.BehaviorRemark;
 import seedu.address.model.person.remarks.ClassRemark;
@@ -91,5 +92,31 @@ public class RemarkCommandParserTest {
 
         // no index
         assertParseFailure(parser, RemarkCommand.COMMAND_WORD + " " + nonEmptyRemark, expectedMessage);
+    }
+
+    @Test
+    public void parse_repeatedPrefixes_failure() {
+            Index targetIndex = INDEX_FIRST_PERSON;
+
+            // duplicate remark
+            String userInput = targetIndex.getOneBased() + " " + PREFIX_REMARK + "first " + PREFIX_REMARK + "second";
+            assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
+
+            // duplicate dietaryRemark
+            userInput = targetIndex.getOneBased() + " " + PREFIX_DIETARY_REMARK + "veg "
+                            + PREFIX_DIETARY_REMARK + "halal";
+            assertParseFailure(parser, userInput,
+                            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DIETARY_REMARK));
+
+            // duplicate classRemark
+            userInput = targetIndex.getOneBased() + " " + PREFIX_CLASS_REMARK + "P3-A " + PREFIX_BEHAVIOR_REMARK
+                            + "calm " + PREFIX_CLASS_REMARK + "P3-B";
+            assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASS_REMARK));
+
+            // duplicate behaviorRemark
+            userInput = targetIndex.getOneBased() + " " + PREFIX_BEHAVIOR_REMARK
+                + "calm " + PREFIX_BEHAVIOR_REMARK + "noisy";
+            assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BEHAVIOR_REMARK));
+
     }
 }

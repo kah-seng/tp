@@ -34,6 +34,9 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMARK, PREFIX_DIETARY_REMARK,
                 PREFIX_CLASS_REMARK, PREFIX_BEHAVIOR_REMARK);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(
+            PREFIX_REMARK, PREFIX_DIETARY_REMARK, PREFIX_CLASS_REMARK, PREFIX_BEHAVIOR_REMARK);
+
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
