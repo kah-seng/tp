@@ -145,6 +145,7 @@
                 <Label text="- Multiple parameters can be used (e.g. n/, a/, pn/, pe/)." wrapText="true"/>
                 <Label text="- Matches are case-insensitive." wrapText="true"/>
                 <Label text="- A contact is shown if it matches at least one condition." wrapText="true"/>
+                <Label text="- Use the list command to return to the full list after using find." wrapText="true"/>
 
                 <Label text="Examples:" styleClass="help-subtitle"/>
                 <VBox spacing="2" styleClass="example-box">

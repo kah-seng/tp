@@ -154,7 +154,8 @@ Format: `find [NAME] [n/NAME] [a/AGE] [ad/ADDRESS] [t/TAG] [pn/PARENT_NAME] [pc/
 * The search matches partial words (e.g., `jacob` will match `jacobyu@email.com`, `Justin` will match `Justinian`)
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* * At least one of the optional fields must be provided.
+* At least one of the optional fields must be provided.
+* Use the list command to return to the full list after using find.
 
 Examples:
 * `find John` returns `john` and `John Doe`
