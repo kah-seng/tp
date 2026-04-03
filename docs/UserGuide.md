@@ -143,7 +143,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Filter students based on matching keywords to specified fields.
 
 Format: `find [NAME] [n/NAME] [a/AGE] [ad/ADDRESS] [t/TAG] [pn/PARENT_NAME] [pc/PARENT_PHONE] [pe/PARENT_EMAIL] [d/DIETARY] [c/CLASS] [b/BEHAVIOR]`
 
@@ -162,9 +162,9 @@ Examples:
 * `find n/Jacob pn/Madison` returns students whose name contains “Jacob” or whose parent name contains “Madison”
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
 Format: `delete INDEX [INDEX]…​ [START-END]…​`
 
@@ -178,6 +178,24 @@ Format: `delete INDEX [INDEX]…​ [START-END]…​`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding or removing a remark from a student : `remark`
+
+Adds a remark to the specified student from CareContacts.
+
+Format: `INDEX r/[REMARK] d/[DIETARY REMARK] b/[BEHAVIOR REMARK] c/[CLASS]`
+
+* Adds a remark to a student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Existing remarks will be overwritten by the new values.
+* You must provide at least one prefix (r/, d/, c/, or b/).
+* To delete a remark, use the prefix with no value (e.g. remark 1 r/).
+
+Examples:
+* `remark 1 d/` removes the dietary remark from the student at index 1 
+* `remark 1 r/enjoys sports d/allergic to shellfish c/1C b/very energetic`
+adds the following remarks to the student at index 1
 
 ### Clearing all entries : `clear`
 
