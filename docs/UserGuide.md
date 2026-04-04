@@ -128,7 +128,7 @@ Format: `list  [n/] | [a/] | [pn/] | [pc/] | [pe/]`
 
 Edits an existing person in the address book.
 
-Format: `INDEX [n/NAME] [a/AGE] [ad/ADDRESS] [pn/PARENT NAME] [pc/PARENT PHONE] [pe/PARENT EMAIL] [t/TAG]...…​`
+Format: `edit INDEX [n/NAME] [a/AGE] [ad/ADDRESS] [pn/PARENT NAME] [pc/PARENT PHONE] [pe/PARENT EMAIL] [t/TAG]...…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
