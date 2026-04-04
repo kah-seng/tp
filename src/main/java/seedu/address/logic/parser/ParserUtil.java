@@ -119,7 +119,7 @@ public class ParserUtil {
         requireNonNull(age);
         String trimmedAge = age.trim();
         if (!Age.isValidAge(trimmedAge)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
         }
         return new Age(trimmedAge);
     }

@@ -1,10 +1,17 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEHAVIOR_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIETARY_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -16,6 +23,8 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.Age;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -30,47 +39,73 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        // No prefixes - should treat as student name keywords in the map
-        Map<Prefix, List<String>> nameMap = new HashMap<>();
-        nameMap.put(PREFIX_NAME, Arrays.asList("Alice", "Bob"));
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(nameMap));
+        // 1. Multiple keywords for a single prefix
+        Map<Prefix, List<String>> multiKeywordMap = new HashMap<>();
+        multiKeywordMap.put(PREFIX_NAME, Arrays.asList("Alice", "Bob"));
+        assertParseSuccess(parser, " n/Alice Bob", new FindCommand(
+                new NameContainsKeywordsPredicate(multiKeywordMap)));
 
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
-
-        // Multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
-
-        // Prefix search - parent name
-        Map<Prefix, List<String>> parentMap = new HashMap<>();
-        parentMap.put(PREFIX_PARENT_NAME, Arrays.asList("Tan", "Smith"));
-        FindCommand expectedParentCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(parentMap));
-
-        assertParseSuccess(parser, " pn/Tan pn/Smith", expectedParentCommand);
-
-        // Multi-prefix search (Age and Dietary Remark) ---
-        Map<Prefix, List<String>> multiMap = new HashMap<>();
-        multiMap.put(PREFIX_AGE, Arrays.asList("12"));
-        multiMap.put(PREFIX_DIETARY_REMARK, Arrays.asList("Vegan"));
-        FindCommand expectedMultiCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(multiMap));
-
-        assertParseSuccess(parser, " a/12 d/Vegan", expectedMultiCommand);
+        // 2. Duplicate prefixes (n/Alice n/Bob)
+        Map<Prefix, List<String>> duplicatePrefixMap = new HashMap<>();
+        duplicatePrefixMap.put(PREFIX_NAME, Arrays.asList("Alice", "Bob"));
+        assertParseSuccess(parser, " n/Alice n/Bob", new FindCommand(
+                new NameContainsKeywordsPredicate(duplicatePrefixMap)));
     }
 
     @Test
-    public void parse_invalidPrefixArgs_throwsParseException() {
-        // Empty student name prefix
-        assertParseFailure(parser, " n/", String.format(
-                MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    public void parse_illegalPreamble_throwsParseException() {
+        // This currently triggers checkForInvalidPrefixes
+        assertParseFailure(parser, " Alice/Bob", "Unknown prefix detected: Alice/Bob"
+                + "\nPlease use only valid prefixes (n/, pn/, a/, etc.)");
+    }
 
-        // Empty parent name prefix
-        assertParseFailure(parser, " pn/", String.format(
-                MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    @Test
+    public void parse_allPrefixes_success() {
+        Prefix[] allPrefixes = {
+            PREFIX_NAME, PREFIX_ADDRESS, PREFIX_AGE, PREFIX_TAG,
+            PREFIX_REMARK, PREFIX_DIETARY_REMARK, PREFIX_CLASS_REMARK,
+            PREFIX_BEHAVIOR_REMARK, PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE,
+            PREFIX_PARENT_EMAIL
+        };
 
-        // One valid, one empty (Dietary remark empty)
-        assertParseFailure(parser, " n/Alice d/", String.format(
-                MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        for (Prefix p : allPrefixes) {
+            String input = " " + p.getPrefix() + "testValue";
+            if (p.equals(PREFIX_AGE)) {
+                input = " a/12";
+            }
+            if (p.equals(PREFIX_PARENT_PHONE)) {
+                input = " pc/98765432";
+            }
+            if (p.equals(PREFIX_PARENT_EMAIL)) {
+                input = " pe/test@email.com";
+            }
+
+            final String finalInput = input;
+            org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> parser.parse(finalInput));
+        }
+    }
+
+    @Test
+    public void parse_invalidPrefix_throwsParseException() {
+        assertParseFailure(parser, " unknown/", "Unknown prefix detected: unknown/"
+                + "\nPlease use only valid prefixes (n/, pn/, a/, etc.)");
+
+        assertParseFailure(parser, " dave/ ", "Unknown prefix detected: dave/"
+                + "\nPlease use only valid prefixes (n/, pn/, a/, etc.)");
+    }
+
+    @Test
+    public void parse_invalidValue_throwsParseException() {
+        // 1. Invalid format for specific types
+        assertParseFailure(parser, " a/notAnAge", Age.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " pc/notAPhone", seedu.address.model.person.Phone.MESSAGE_CONSTRAINTS);
+
+        // 2. Empty values (after the prefix)
+        assertParseFailure(parser, " n/ ", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " a/ ", Age.MESSAGE_CONSTRAINTS);
+
+        // 3. Mixed valid and invalid
+        // Should fail as soon as the first invalid value (a/abc) is encountered
+        assertParseFailure(parser, " n/Alice a/abc", Age.MESSAGE_CONSTRAINTS);
     }
 }

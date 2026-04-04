@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.Prefix;
 
@@ -54,17 +53,32 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        assert person != null : "Person to test cannot be null";
+
         // Returns true if ANY prefix in the map has a keyword that matches the person's corresponding field.
         return keywordsMap.entrySet().stream().anyMatch(entry -> {
             Prefix prefix = entry.getKey();
             List<String> keywords = entry.getValue();
-            String fieldToSearch = getFieldByPrefix(prefix, person);
 
-            return keywords.stream().anyMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(fieldToSearch, keyword));
+            assert keywords != null && !keywords.isEmpty() : "Keywords list in map should not be null or empty";
+
+            String fieldToSearch = getFieldByPrefix(prefix, person);
+            assert fieldToSearch != null : "Field to search extracted from person should not be null";
+
+            return keywords.stream().anyMatch(keyword -> {
+                // Exact match for Age to avoid "1" matching "12"
+                if (prefix.equals(PREFIX_AGE)) {
+                    return fieldToSearch.equals(keyword);
+                }
+                return fieldToSearch.toLowerCase().contains(keyword.toLowerCase());
+            });
         });
     }
 
+    /**
+     * Helper method to extract the string value of a specific field from a Person
+     * based on the provided Prefix.
+     */
     private String getFieldByPrefix(Prefix prefix, Person person) {
         if (prefix.equals(PREFIX_NAME)) {
             return person.getName().fullName;
