@@ -115,9 +115,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addSimilarPerson(Person personToAdd) {
+        addressBook.addPerson(personToAdd);
+        updateFilteredPersonList(person -> person.hasSimilarName(personToAdd));
+        assert getFilteredPersonList() != null : "Model filtered list should not be null after update";
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 

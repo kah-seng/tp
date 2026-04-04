@@ -58,6 +58,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_PERSON_WARNING = """
+            Warning: A similar name exists in the address book.
+            Please check for possible duplicates.
+            """;
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -90,9 +94,22 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        String feedbackToUser = String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        boolean isDuplicateWarningApplicable = !personToEdit.hasSimilarName(editedPerson)
+                && model.hasSimilarPerson(editedPerson);
+
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+
+        if (isDuplicateWarningApplicable) {
+            feedbackToUser = MESSAGE_EDIT_PERSON_WARNING + feedbackToUser;
+            model.updateFilteredPersonList(person -> person.hasSimilarName(editedPerson));
+            assert model.getFilteredPersonList() != null : "Model filtered list should not be null after update";
+        } else {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
+
+        return new CommandResult(feedbackToUser);
     }
 
     /**

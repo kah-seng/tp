@@ -76,9 +76,17 @@ public interface Model {
 
     /**
      * Adds the given person.
+     * Shows a list of all persons.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds a person whose normalized name matches at least one name in the address book.
+     * Shows a list of persons who have the same normalized names
+     * {@code person} must not already exist in the address book.
+     */
+    void addSimilarPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
