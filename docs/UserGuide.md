@@ -58,7 +58,7 @@ CareContacts is a desktop student management application designed specifically f
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Items separated by `|` are mutually exclusive options; you may pick at most one option. 
+* Items separated by `|` are mutually exclusive options; you may pick at most one option.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -194,7 +194,7 @@ Format: `remark INDEX r/[REMARK] d/[DIETARY REMARK] b/[BEHAVIOR REMARK] c/[CLASS
 * To delete a remark, use the prefix with no value (e.g. remark 1 r/).
 
 Examples:
-* `remark 1 d/` removes the dietary remark from the student at index 1 
+* `remark 1 d/` removes the dietary remark from the student at index 1
 * `remark 1 r/enjoys sports d/allergic to shellfish c/1C b/very energetic`
 adds the following remarks to the student at index 1
 
@@ -284,10 +284,10 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples                                                                                                                                                                                             
+Action     | Format, Examples
 -----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**   | `help`                                                                                                                                                                                                       
-**Add**    | `add n/STUDENT_NAME a/AGE ad/ADDRESS pn/PARENT_NAME pc/PARENT_PHONE pe/PARENT_EMAIL [t/TAG]...` <br> e.g., `add n/James Ho a/12 ad/Kent Ridge Street pn/Bryan Ho pc/98765432 pe/bryan@example.com t/student` 
+**Help**   | `help`
+**Add**    | `add n/STUDENT_NAME a/AGE ad/ADDRESS pn/PARENT_NAME pc/PARENT_PHONE pe/PARENT_EMAIL [t/TAG]...` <br> e.g., `add n/James Ho a/12 ad/Kent Ridge Street pn/Bryan Ho pc/98765432 pe/bryan@example.com t/student`
 **List**   | `list [n/] \| [a/] \| [pn/] \| [pc/] \| [pe/]` <br> e.g., `list a/`
 **Edit**   | `edit INDEX [n/NAME] [a/AGE] [ad/ADDRESS] [pn/PARENT NAME] [pc/PARENT PHONE] [pe/PARENT EMAIL] [t/TAG]...`<br> e.g.,`edit 2 pn/James Lee pe/jameslee@example.com`
 **Find**   | `find [NAME] [n/NAME] [a/AGE] [ad/ADDRESS] [t/TAG] [pn/PARENT_NAME] [pc/PARENT_PHONE] [pe/PARENT_EMAIL] [d/DIETARY] [c/CLASS] [b/BEHAVIOR]`<br> e.g., `find James pn/Jake`
