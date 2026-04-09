@@ -484,8 +484,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Student care supervisor requests for information on the available commands.
-2.  CareContacts displays information on the available commands, parameters and formats.
+
+1. User enters the `help` command.
+2. CareContacts displays a help window containing a subset of commonly used commands, their formats, and a link to the full User Guide.
 
 
     Use case ends.
