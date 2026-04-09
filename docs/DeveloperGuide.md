@@ -356,7 +356,7 @@ This ensures that archived data is preserved across sessions.
 - **Reversibility**: Archiving is designed to be reversible via the `restore` command, unlike deletion which is permanent.
 - **Minimal disruption**: Existing features continue to operate only on active students, avoiding major changes to current logic.
 
-<puml src="diagrams/DataArchivingState.puml" width="280" />
+<puml src="diagrams/DataArchivingState.puml" width="400" />
 
 --------------------------------------------------------------------------------------------------------------------
 
