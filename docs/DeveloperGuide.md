@@ -360,7 +360,7 @@ This ensures that archived data is preserved across sessions.
 - **Reversibility**: Archiving is designed to be reversible via the `restore` command, unlike deletion which is permanent.
 - **Minimal disruption**: Existing features continue to operate only on active students, avoiding major changes to current logic.
 
-<puml src="diagrams/DataArchivingState.puml" width="280" />
+<puml src="diagrams/DataArchivingState.puml" width="400" />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -488,8 +488,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Student care supervisor requests for information on the available commands.
-2.  CareContacts displays information on the available commands, parameters and formats.
+
+1. User enters the `help` command.
+2. CareContacts displays a help window containing a subset of commonly used commands, their formats, and a link to the full User Guide.
 
 
     Use case ends.
@@ -548,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Student care center**: An afterschool program for primary-school aged children
 * **Student care supervisor**: A staff member responsible for managing the daily operations and staff of the student care center
-* **Student**: A child enrolled in the student care center whose information is stored in CareContacts.
+* **Student**: A child enrolled in the student care center whose information is stored in CareContacts
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -588,6 +589,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add n/John Doe a/12 ad/311, Clementi Ave 2, #02-25 pn/Jane Doe pc/87516234 pe/janed@example.com t/friends t/basketball`
       Expected: The student is added to the list. Details of the added student are shown in the status message. Timestamp in the status bar is updated.
 
+1. Adding a student whose normalized name already exists in CareContacts
+
    1. Prerequisites: A student named "Alex Yeoh" exists in CareContacts.
    1. Test case: `add n/alex  yeoh a/11 ad/289, Jurong West St 41, #03-12 pn/John Yeoh pc/91234567 pe/john.yeoh@example.com t/choir`
       Expected: A message warning the user of a possible duplicate is shown.
@@ -601,6 +604,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit 1 pc/12345678`
        Expected: The student at index 1's details are updated in the list to show the new parent contact details.
        Details of the edited student are shown in the status message. Timestamp in the status bar is updated.
+
+1. Editing a student whose normalized name already exists in CareContacts
 
     1. Prerequisites: A student named "Alex Yeoh" exists in CareContacts. Another student exists in the CareContacts at index 1.
 
