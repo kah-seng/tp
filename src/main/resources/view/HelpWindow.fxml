@@ -46,7 +46,7 @@
 
                 <Label fx:id="addSection" text="Add" styleClass="help-section"/>
                 <Label text="Command:" styleClass="help-subtitle"/>
-                <Label text="add n/STUDENT_NAME a/AGE ad/ADDRESS pn/PARENT_NAME pc/PARENT_PHONE pe/PARENT_EMAIL" styleClass="help-command" wrapText="True"/>
+                <Label text="add n/STUDENT_NAME a/AGE ad/ADDRESS pn/PARENT_NAME pc/PARENT_PHONE pe/PARENT_EMAIL [t/TAG]…​" styleClass="help-command" wrapText="True"/>
                 <Label text="Examples:" styleClass="help-subtitle"/>
 
                 <VBox spacing="2" styleClass="example-box">
