@@ -164,7 +164,8 @@ public class ModelManager implements Model {
 
     @Override
     public void sortFilteredPersonListByParentPhone() {
-        sortedPersons.setComparator(Comparator.comparing(person -> person.getParentPhone().toString()));
+        sortedPersons.setComparator(
+                Comparator.comparing(person -> Integer.parseInt(person.getParentPhone().toString())));
     }
 
     @Override
