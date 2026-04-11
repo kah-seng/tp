@@ -105,8 +105,6 @@ public class EditCommand extends Command {
             feedbackToUser = MESSAGE_EDIT_PERSON_WARNING + feedbackToUser;
             model.updateFilteredPersonList(person -> person.hasSimilarName(editedPerson));
             assert model.getFilteredPersonList() != null : "Model filtered list should not be null after update";
-        } else {
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
 
         return new CommandResult(feedbackToUser);
