@@ -25,7 +25,7 @@ Optimized for a Command Line Interface (CLI), CareContacts is ideal for fast typ
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar carecontacts.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A Graphical User Interface (GUI) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -148,7 +148,7 @@ Format: `edit INDEX [n/NAME] [a/AGE] [ad/ADDRESS] [pn/PARENT NAME] [pc/PARENT PH
 
 Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 pn/91234567 pe/johndoe@example.com` Edits the phone number and email address of the 3rd person's parent to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 3 pc/91234567 pe/johndoe@example.com` Edits the phone number and email address of the 3rd person's parent to be `91234567` and `johndoe@example.com` respectively.
 
 ### Locating persons by name: `find`
 
@@ -158,10 +158,13 @@ Format: `find [NAME] [n/NAME] [a/AGE] [ad/ADDRESS] [t/TAG] [pn/PARENT_NAME] [pc/
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* If the keyword follows the prefix, the search returns contacts that match ANY of the given keywords (OR search) if they match the specified parameter for the specific prefix.
-* If no prefix is specified (e.g., n/, a/, pn/, pe/), the search will default to student name (n/).
+* If the keyword follows the prefix, the search returns contacts that match ANY of the given keywords (`OR` search) if they match the specified parameter for the specific prefix.
+* If no prefix is specified (e.g., `n/`, `a/`, `pn/`, `pe/`), the search will default to student name (`n/`).
+* Prefixes can be used multiple times. If you provide multiple instances of the same prefix (e.g., `find a/10 a/12`), the search will return results that match any of those values.
+* Preamble keywords and the `n/` prefix both target student names; you can use either or both to filter by name (e.g., `find Hans Bo`, `find n/Hans Bo`, and `find Hans n/Bo` yield the same result).
 * The search matches partial words (e.g., `jacob` will match `jacobyu@email.com`, `Justin` will match `Justinian`) except for the age prefix.
-* Searching by age uses an exact match instead of a partial match (e.g., a/12 will not match a student who is 1).
+* Searching by age uses an exact match instead of a partial match (e.g., `a/12` will not match a student who is 1).
+* Searching by address (`ad/`) supports phrase matching; keywords are not split by spaces. e.g. `ad/Blk 20` will match `Blk 201` but not `Blk 30`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * At least one of the optional fields must be provided.
@@ -172,6 +175,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 * `find alex david n/john` returns `Alex Yeoh`, `David Li`, and `John Doe`
+* `find ad/Blk 30 Geylang` returns all contacts living at that specific block and street. The search treats the entire string following ad/ as a single location fragment.
 * `find n/Jacob pn/Madison` returns students whose name contains `Jacob` and students whose parent's name contains `Madison`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 * `find n/Alice pn/Tan a/12` returns all students named `Alice`, and students whose parent's name contains `Tan`, and students who are exactly 12 years old.
