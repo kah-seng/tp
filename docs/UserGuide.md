@@ -161,6 +161,7 @@ Format: `find [NAME] [n/NAME] [a/AGE] [ad/ADDRESS] [t/TAG] [pn/PARENT_NAME] [pc/
 * If the keyword follows the prefix, the search returns contacts that match ANY of the given keywords (`OR` search) if they match the specified parameter for the specific prefix.
 * If no prefix is specified (e.g., `n/`, `a/`, `pn/`, `pe/`), the search will default to student name (`n/`).
 * Prefixes can be used multiple times. If you provide multiple instances of the same prefix (e.g., `find a/10 a/12`), the search will return results that match any of those values.
+* Preamble keywords and the `n/` prefix both target student names; you can use either or both to filter by name (e.g., `find Hans Bo`, `find n/Hans Bo`, and `find Hans n/Bo` yield the same result).
 * The search matches partial words (e.g., `jacob` will match `jacobyu@email.com`, `Justin` will match `Justinian`) except for the age prefix.
 * Searching by age uses an exact match instead of a partial match (e.g., `a/12` will not match a student who is 1).
 * Searching by address (`ad/`) supports phrase matching; keywords are not split by spaces. e.g. `ad/Blk 20` will match `Blk 201` but not `Blk 30`.
