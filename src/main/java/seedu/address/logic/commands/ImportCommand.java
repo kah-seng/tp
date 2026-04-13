@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,6 +32,8 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_FILE_READ_ERROR = "Unable to read CSV file: %1$s";
     public static final String MESSAGE_CSV_INVALID_FORMAT = "Invalid CSV format at line %1$d: %2$s";
     public static final String MESSAGE_SUCCESS = "Imported %1$d person(s). Skipped %2$d duplicate person(s).";
+    public static final String MESSAGE_SIMILAR_NAME_WARNING =
+            "Warning: Potential duplicate name(s) detected for imported student(s): %1$s";
 
     private final Path csvFilePath;
     private final CsvPersonImporter csvPersonImporter;
@@ -58,6 +62,7 @@ public class ImportCommand extends Command {
         List<Person> importedPersons = csvPersonImporter.read(csvFilePath);
         int importedCount = 0;
         int skippedDuplicates = 0;
+        Set<String> potentialDuplicateNames = new LinkedHashSet<>();
 
         for (Person person : importedPersons) {
             if (model.hasPerson(person)) {
@@ -65,11 +70,21 @@ public class ImportCommand extends Command {
                 continue;
             }
 
+            if (model.hasSimilarPerson(person)) {
+                potentialDuplicateNames.add(person.getName().fullName);
+            }
+
             model.addPerson(person);
             importedCount++;
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, importedCount, skippedDuplicates));
+        String feedbackToUser = String.format(MESSAGE_SUCCESS, importedCount, skippedDuplicates);
+        if (!potentialDuplicateNames.isEmpty()) {
+            feedbackToUser += "\n" + String.format(MESSAGE_SIMILAR_NAME_WARNING,
+                    String.join(", ", potentialDuplicateNames));
+        }
+
+        return new CommandResult(feedbackToUser);
     }
 
     @Override
