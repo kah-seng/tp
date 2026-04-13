@@ -102,7 +102,7 @@ Format: `add n/STUDENT_NAME a/AGE ad/ADDRESS pn/PARENT_NAME pc/PARENT_PHONE pe/P
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
-**Examples:**
+Examples:
 * `add n/James Cook a/12 ad/Blk 132 Edgedale Plains, #15-96 pn/Madison Cook pc/87654321 pe/maddie@gmail.com`
 * `add n/Mary Chew a/7 ad/Blk 123 Bukit Merah Lane, #12-23 pn/Augusta Chew pc/12345678 pe/augusta@email.com t/allergies t/basketball`
 
@@ -114,7 +114,7 @@ When adding a student, the system checks for possible duplicates based on the st
 
 #### Exact Duplicates (Blocked)
 A student will **not be added** if both of the following match exactly:
-- Name (as entered, without normalization)
+- Name (after ignoring leading and trailing spaces)
 - Age
 
 #### Potential Duplicates (Warning Only)
@@ -123,15 +123,15 @@ The system will display a message **warning** the user of a potential duplicate 
 #### Name Normalization Rules
 Names are considered the same after normalization if:
 - Differences in capitalization are ignored
-- Extra spaces are removed
+- Reducing multiple spaces between words to a single space
 
-**Example:**
+Example:
 - `John Doe` and `john   doe  ` are treated as the same name
 
-#### Limitations
+#### ⚠️ Limitations
 This duplicate detection is limited and may miss some similar names.
 
-**Examples that will NOT trigger a warning:**
+Examples that will **NOT** trigger a warning:
 - `Justine Ong` vs `Justin Ong`
 - `Annabelle` vs `Anna Belle`
 
