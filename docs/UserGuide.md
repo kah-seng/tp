@@ -14,6 +14,7 @@ Optimized for a Command Line Interface (CLI), CareContacts is ideal for fast typ
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -44,6 +45,7 @@ Optimized for a Command Line Interface (CLI), CareContacts is ideal for fast typ
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -71,6 +73,8 @@ Optimized for a Command Line Interface (CLI), CareContacts is ideal for fast typ
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows a help window with a small set of essential commands to help new users get started quickly.
@@ -81,12 +85,11 @@ This help window is not a complete reference of all available commands.
 Some commands (e.g., edit, import, etc.) are not included.
 For the full list of features and commands, refer to the User Guide.
 
-Format: help
+Format: `help`
 
 ![help message](images/helpWindow.png)
 
-Format: `help`
-
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
@@ -103,23 +106,38 @@ Examples:
 * `add n/James Cook a/12 ad/Blk 132 Edgedale Plains, #15-96 pn/Madison Cook pc/87654321 pe/maddie@gmail.com`
 * `add n/Mary Chew a/7 ad/Blk 123 Bukit Merah Lane, #12-23 pn/Augusta Chew pc/12345678 pe/augusta@email.com t/allergies t/basketball`
 
-### Duplicate name detection
+<div markdown="block" class="alert alert-info">
 
-If a student whose name matches an existing name after normalization is added, the system will display a warning and show a list of similar names. However, the student will still be added.
+### Duplicate Name Detection
 
-A name is considered a match after normalization if the name is the same after:
+When adding a student, the system checks for possible duplicates based on the student's **name and age**.
 
-* Differences in capitalization are ignored
-* Extra spaces are removed
+#### Exact Duplicates (Blocked)
+A student will **not be added** if both of the following match exactly:
+- Name (after ignoring leading and trailing spaces)
+- Age
 
-For example, `John Doe` and `john   doe  ` are treated as the same name.
+#### Potential Duplicates (Warning Only)
+The system will display a message **warning** the user of a potential duplicate and show a list of possible duplicates if the student names are the same **after normalization**.
 
-Limitations:
+#### Name Normalization Rules
+Names are considered the same after normalization if:
+- Differences in capitalization are ignored
+- Reducing multiple spaces between words to a single space
 
-This check is limited and may miss some similar names
-For example:
-* `Justine Ong` vs `Justin Ong` will not trigger a warning
-* `Annabelle` vs `Anna Belle` will not trigger a warning
+Example:
+- `John Doe` and `john   doe  ` are treated as the same name
+
+#### ⚠️ Limitations
+This duplicate detection is limited and may miss some similar names.
+
+Examples that will **NOT** trigger a warning:
+- `Justine Ong` vs `Justin Ong`
+- `Annabelle` vs `Anna Belle`
+
+</div>
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list`
 
@@ -132,6 +150,8 @@ Format: `list  [n/] | [a/] | [pn/] | [pc/] | [pe/]`
 * Only one prefix can be used at a time.
 * Alphabetical sort is applied to `n/`, `pn/` and `pe/`.
 * Numeric sort in ascending order is applied to `a/` and `pc/`.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -149,6 +169,8 @@ Format: `edit INDEX [n/NAME] [a/AGE] [ad/ADDRESS] [pn/PARENT NAME] [pc/PARENT PH
 Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 pc/91234567 pe/johndoe@example.com` Edits the phone number and email address of the 3rd person's parent to be `91234567` and `johndoe@example.com` respectively.
+
+<div style="page-break-after: always;"></div>
 
 ### Locating persons by name: `find`
 
@@ -180,6 +202,8 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 * `find n/Alice pn/Tan a/12` returns all students named `Alice`, and students whose parent's name contains `Tan`, and students who are exactly 12 years old.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a student : `delete`
 
 Deletes the specified student from the address book.
@@ -197,6 +221,8 @@ Format: `delete INDEX [INDEX]... [START-END]...`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding or removing a remark from a student : `remark`
 
@@ -216,6 +242,7 @@ Examples:
 * `remark 1 r/enjoys sports d/allergic to shellfish c/1C b/very energetic`
 adds the following remarks to the student at index 1
 
+<div style="page-break-after: always;"></div>
 <a id="importing-students"></a>
 
 ### Importing students : `import`
@@ -247,11 +274,15 @@ Examples:
 * `import data/contacts.csv`
 * `import "data/term 2/students.csv"`
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
@@ -259,9 +290,13 @@ Exits the program.
 
 Format: `exit`
 
+<div style="page-break-after: always;"></div>
+
 ### Saving the data
 
 CareContacts data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+<div style="page-break-after: always;"></div>
 
 ### Importing the data
 
@@ -271,9 +306,13 @@ Use the `import` command to load students from a CSV file:
 
 Refer to [Importing students : `import`](#importing-students) for the required CSV format.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing the data file
 
 CareContacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div style="page-break-after: always;"></div>
 
 <box type="warning" seamless>
 
@@ -281,10 +320,6 @@ CareContacts data are saved automatically as a JSON file `[JAR file location]/da
 If your changes to the data file makes its format invalid, CareContacts will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the CareContacts to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
