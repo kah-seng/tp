@@ -800,4 +800,16 @@ This prevents users from entering valid names such as `Ahmad s/o Rahman`, `Jean-
 We plan to update the name validation and parsing logic to support these characters 
 while ensuring they do not conflict with command parsing.
 
-### 2. Error message when the data file is corrupted 
+### 2. Provide more specific error message for invalid delete index
+
+Currently, entering an invalid index for the delete command (e.g., delete -1 or delete 0) results in a generic "Invalid Command Format" message.
+This does not clearly inform the user what went wrong or how to correct their input.
+We plan to improve the error handling by providing a more specific message, such as:
+"Please enter a valid index number greater than 0 and within the range of the displayed contact list."
+
+### 3. Improve remark display for better readability
+
+Currently, the remark field accepts an unlimited number of characters, and long remarks are fully displayed in the contact list.
+This can clutter the interface and make it difficult for users to quickly scan and navigate through contacts.
+We plan to improve the display of remarks by constraining them within a fixed-size area and introducing a scrollbar for longer content.
+Additionally, long remarks may be truncated in the list view with an ellipsis (...), while still allowing users to access the full content when needed.
