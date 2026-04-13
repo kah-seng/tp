@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class ImportCommandTest {
 
@@ -92,6 +93,31 @@ public class ImportCommandTest {
         assertThrows(CommandException.class,
             String.format(ImportCommand.MESSAGE_FILE_READ_ERROR, missingPath), () ->
                 importCommand.execute(new ModelStubAcceptingPersons()));
+    }
+
+    @Test
+    public void execute_similarNameImported_showsWarning() throws Exception {
+        Path csvPath = tempDir.resolve("similar-name.csv");
+        Files.writeString(csvPath,
+                "name,age,address,parentName,parentPhone,parentEmail,tags,remark,dietaryRemark,classRemark,"
+                        + "behaviorRemark\n"
+                        + "Alex Yu,3,Blk 30 Geylang Street 29 #06-40,Andre Yeoh,999,andreyeoh@gmail.com,,,,,\n");
+
+        ModelStubAcceptingPersons modelStub = new ModelStubAcceptingPersons();
+        modelStub.addPerson(new PersonBuilder().withName("aLeX   yU")
+                .withAge("4")
+                .withAddress("11 Existing Street")
+                .withParentName("Parent Existing")
+                .withParentPhone("98887777")
+                .withParentEmail("existing@example.com")
+                .build());
+
+        CommandResult result = new ImportCommand(csvPath).execute(modelStub);
+
+        String expectedMessage = String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0)
+                + "\n" + String.format(ImportCommand.MESSAGE_SIMILAR_NAME_WARNING, "Alex Yu");
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertEquals(2, modelStub.personsAdded.size());
     }
 
     /**
@@ -212,6 +238,12 @@ public class ImportCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasSimilarPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(existingPerson -> existingPerson.hasSimilarName(person));
         }
 
         @Override
