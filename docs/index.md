@@ -3,17 +3,18 @@
   title: ""
 ---
 
-# AddressBook Level-3
+# CareContacts
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/AY2526S2-CS2103-T11-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2526S2-CS2103-T11-2/tp/actions)
+[![codecov](https://codecov.io/gh/ay2526s2-cs2103-t11-2/tp/graph/badge.svg?token=GA6P99K5PD)](https://codecov.io/gh/ay2526s2-cs2103-t11-2/tp)
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**CareContacts is a desktop student management application designed specifically for Student Care Supervisors.**
+It is optimized for a Command Line Interface (CLI) and for fast typists.
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using CareContacts, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing CareContacts, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
