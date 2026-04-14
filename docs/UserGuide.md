@@ -111,7 +111,7 @@ Examples:
 
 ### Duplicate Name Detection
 
-When adding a student, the system checks for possible duplicates based on the student's **name and age**.
+When adding or editing a student's information, the system checks for possible duplicates based on the student's **name and age**.
 
 #### Exact Duplicates (Blocked)
 A student will **not be added** if both of the following match exactly:
