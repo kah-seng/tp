@@ -14,7 +14,6 @@ Optimized for a Command Line Interface (CLI), CareContacts is ideal for fast typ
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -45,7 +44,6 @@ Optimized for a Command Line Interface (CLI), CareContacts is ideal for fast typ
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -74,8 +72,6 @@ Optimized for a Command Line Interface (CLI), CareContacts is ideal for fast typ
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 ### Viewing help : `help`
 
 Shows a help window with a small set of essential commands to help new users get started quickly.
@@ -89,8 +85,6 @@ For the full list of features and commands, refer to the User Guide.
 Format: `help`
 
 ![help message](images/helpWindow.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
@@ -138,8 +132,6 @@ Examples that will **NOT** trigger a warning:
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -151,8 +143,6 @@ Format: `list  [n/] | [a/] | [pn/] | [pc/] | [pe/]`
 * Only one prefix can be used at a time.
 * Alphabetical sort is applied to `n/`, `pn/` and `pe/`.
 * Numeric sort in ascending order is applied to `a/` and `pc/`.
-
-<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -170,8 +160,6 @@ Format: `edit INDEX [n/NAME] [a/AGE] [ad/ADDRESS] [pn/PARENT NAME] [pc/PARENT PH
 Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 pc/91234567 pe/johndoe@example.com` Edits the phone number and email address of the 3rd person's parent to be `91234567` and `johndoe@example.com` respectively.
-
-<div style="page-break-after: always;"></div>
 
 ### Locating persons by name: `find`
 
@@ -203,8 +191,6 @@ Examples:
 * `find n/Jacob pn/Madison` returns students whose name contains `Jacob` and students whose parent's name contains `Madison`
 * `find n/Alice pn/Tan a/12` returns all students named `Alice`, and students whose parent's name contains `Tan`, and students who are exactly 12 years old.
 
-<div style="page-break-after: always;"></div>
-
 ### Deleting a student : `delete`
 
 Deletes the specified student from the address book.
@@ -223,8 +209,6 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-<div style="page-break-after: always;"></div>
-
 ### Adding or removing a remark from a student : `remark`
 
 Adds a remark to the specified student from the address book.
@@ -242,8 +226,6 @@ Examples:
 * `remark 1 d/` removes the dietary remark from the student at index 1
 * `remark 1 r/enjoys sports d/allergic to shellfish c/1C b/very energetic`
 adds the following remarks to the student at index 1
-
-<div style="page-break-after: always;"></div>
 
 ### Importing students : `import`
 
@@ -274,15 +256,11 @@ Examples:
 * `import data/contacts.csv`
 * `import "data/term 2/students.csv"`
 
-<div style="page-break-after: always;"></div>
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
-
-<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
@@ -290,13 +268,9 @@ Exits the program.
 
 Format: `exit`
 
-<div style="page-break-after: always;"></div>
-
 ### Saving the data
 
 CareContacts data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-<div style="page-break-after: always;"></div>
 
 ### Importing the data
 
@@ -306,13 +280,9 @@ Use the `import` command to load students from a CSV file:
 
 Refer to [Importing students : `import`](#importing-students-import) for the required CSV format.
 
-<div style="page-break-after: always;"></div>
-
 ### Editing the data file
 
 CareContacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div style="page-break-after: always;"></div>
 
 <box type="warning" seamless>
 
