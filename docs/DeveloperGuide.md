@@ -814,3 +814,20 @@ Currently, the remark field accepts an unlimited number of characters, and long 
 This can clutter the interface and make it difficult for users to quickly scan and navigate through contacts.
 We plan to improve the display of remarks by constraining them within a fixed-size area and introducing a scrollbar for longer content.
 Additionally, long remarks may be truncated in the list view with an ellipsis (...), while still allowing users to access the full content when needed.
+
+### 4. Relaxing Input Validation for Phone Numbers
+Currently, the application enforces a strict numeric-only format for phone numbers 
+(e.g., rejecting any input containing spaces, brackets, symbols, or text). 
+We plan to relax this "overzealous" validation to allow for more flexible data entry. 
+This will enable users to include context-specific information, 
+such as labelling numbers (e.g., `91234567 (HP)`, `67891234 (Office)`).
+The system will shift from blocking non-compliant inputs to warning the user, 
+ensuring the software remains flexible for various use cases.
+
+### 5. Enhanced Tagging Flexibility
+To better support diverse student categorization needs, 
+we plan to expand the allowed character set for tags. 
+The current alphanumeric-only restriction limits users 
+from using common naming conventions (e.g., `primary-school` or `health_issue`). 
+Future updates will allow for a wider range of special characters, 
+enabling more intuitive and readable tags for Student Care Supervisors.
