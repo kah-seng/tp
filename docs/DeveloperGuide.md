@@ -796,9 +796,8 @@ Team Size: 4
 
 ### 1. Allow common real-world characters in names
 Currently, the application disallows several commonly used characters in real-world names, 
-including `/`, `-`, `'`, `.`, and non-English characters (e.g., accents). 
-This prevents users from entering valid names such as `Ahmad s/o Rahman`, `Jean-Pierre`, `O'Connor`, 
-`J.R.R. Tolkien`, and `Lê Dũng Tráng`. 
+including `/` and non-English characters (e.g., accents). 
+This prevents users from entering valid names such as `Ahmad s/o Rahman` and `Lê Dũng Tráng`. 
 We plan to update the name validation and parsing logic to support these characters 
 while ensuring they do not conflict with command parsing.
 
