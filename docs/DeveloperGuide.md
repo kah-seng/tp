@@ -1,13 +1,13 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
 ---
 
-# CareContacts Developer Guide
+* Table of Contents
+  {:toc}
 
-<!-- * Table of Contents -->
-<page-nav-print />
+
+# CareContacts Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -443,11 +443,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1b. CareContacts detects a duplicate student name.
+* 1b. CareContacts detects a duplicate student.
 
     * 1b1. CareContacts displays an error message.
 
       Use case ends.
+
+* 1b. CareContacts detects a possible duplicate student.
+
+    * 1b1. CareContacts displays a warning message and shows possible duplicates.
+
+      Use case resumes from step 2.
 
 **Use case: UC2 - Delete a student**
 
@@ -537,7 +543,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Software should work without requiring an installer.
 5.  Should be able to hold up to 200 students without any noticeable decline in performance for typical usage.
 6.  Should be usable by a user who has never used the software before.
-7.  A user with above average typing speed for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse.
+7.  A user with above-average typing speed for regular English text should be able to accomplish most core tasks (e.g., adding and deleting contacts) faster using commands than using an equivalent mouse-based interface, compared against a similar GUI-based application.
 8.  Should be able to work with or without internet access.
 9.  Should be backward compatible with data produced by earlier versions of the software.
 
@@ -587,7 +593,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: No students with the same normalized name (case-insensitive, ignoring extra spaces) as "John Doe" exist in CareContacts.
    1. Test case: `add n/John Doe a/12 ad/311, Clementi Ave 2, #02-25 pn/Jane Doe pc/87516234 pe/janed@example.com t/friends t/basketball`
-      Expected: The student is added to the list. Details of the added student are shown in the status message. Timestamp in the status bar is updated.
+      Expected: The student is added to the list. Details of the added student are shown in the status message.
 
 1. Adding a student whose normalized name already exists in CareContacts
 
@@ -595,7 +601,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add n/alex  yeoh a/11 ad/289, Jurong West St 41, #03-12 pn/John Yeoh pc/91234567 pe/john.yeoh@example.com t/choir`
       Expected: A message warning the user of a possible duplicate is shown.
       Students with the same normalized name (case-insensitive, ignoring extra spaces), including the newly added student, are listed.
-      The student is still added to CareContacts. Details of the added student are shown in the status message. Timestamp in the status bar is updated.
+      The student is still added to CareContacts. Details of the added student are shown in the status message.
 
 ### Editing a student's details
 
@@ -603,7 +609,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `edit 1 pc/12345678`
        Expected: The student at index 1's details are updated in the list to show the new parent contact details.
-       Details of the edited student are shown in the status message. Timestamp in the status bar is updated.
+       Details of the edited student are shown in the status message.
 
 1. Editing a student whose normalized name already exists in CareContacts
 
@@ -612,7 +618,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit 1 n/alex      yeoh`
        Expected: A message warning the user of a possible duplicate is shown.
        Students with the same normalized name (case-insensitive, ignoring extra spaces), including the newly added student, are listed.
-       The student name is still edited to CareContacts. Details of the edited student are shown in the status message. Timestamp in the status bar is updated.
+       The student name is still edited to CareContacts. Details of the edited student are shown in the status message.
 
       
 ### Deleting a student
@@ -621,17 +627,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1<br>
-      Expected: First student is deleted from the list. Details of the deleted student are shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete 1`<br>
+      Expected: First student is deleted from the list. Details of the deleted student are shown in the status message.
 
    1. Test case: `delete 1 2 1 3`<br>
-      Expected: Duplicated indices are handled (no duplicate deletions). The first, second, and third unique contacts are deleted from the list. Details of the deleted students are shown in the status message. Timestamp in the status bar is updated.
-
+      Expected: Duplicated indices are handled (no duplicate deletions). The first, second, and third unique contacts are deleted from the list. Details of the deleted students are shown in the status message.
    1. Test case: `delete 1-3`<br>
-      Expected: The first to third student in the list (inclusive) are deleted. Details of the deleted students are shown in the status message. Timestamp in the status bar is updated.
+      Expected: The first to third student in the list (inclusive) are deleted. Details of the deleted students are shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details are shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Error details are shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -747,6 +752,94 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test Case: Missing file
+      1. Exit the application
+      2. Delete `data/addressbook.json`
+      3. Relaunch the application
+      Expected: The application displays sample student entries. The file `data/addressbook.json` is automatically created if the user runs a command that modifies the data (e.g. `add` or `edit`). 
+    
+   1. Test Case: Corrupted `data/addressbook.json` file
+      1. Exit the application
+      2. Open the `data/addressbook.json` file
+      3. Introduce invalid JSON or values
+      4. Save the `data/addressbook.json` file
+      5. Relaunch the application
+      Expected: The application successfully launches, but does not display any entries.
 
-1. _{ more test cases …​ }
+
+## Appendix: Effort
+
+Difficulty: Medium | Effort: Medium
+
+**Expanded Data Model:**
+AB3's person constructor takes a fixed set of required fields. CareContacts needed to track considerably more information per student — including parent contact details and four optional `remark` fields (general, dietary, behavioural, and class). A key design decision was deciding which fields should be mandatory versus optional. We settled on keeping inherent student attributes (name, age, address, parent details) as required, while `remark` fields were made optional and handled through a separate `remark` command. This avoided the add command becoming unwieldy, but required deliberate decisions about how to structure the two commands and where responsibility for each field should sit.
+
+**Remark Command:**
+Rather than cramming all optional fields into `add`, we introduced a dedicated `remark` command. The main challenge was designing it to handle four independent fields that can each be set or cleared in any combination in a single command, while ensuring existing values are not unintentionally overwritten.
+
+**Find Command:**
+`find` was one of the more challenging commands to implement due to the volume of design decisions involved. We had to decide between OR and AND logic for multi-prefix searches, which fields should use partial matching versus exact matching (age uses exact match to avoid nonsensical results), and how to handle multiple keywords within a single prefix. Input validation also had to be robust enough to catch empty prefixes and invalid combinations.
+
+**Duplicate Detection:**
+We debated what should constitute a duplicate. One option was including parent name in the check, but we ruled this out because the same student could be registered by two different parents, which would cause a genuine duplicate to slip through. We settled on student name plus age as the identity check — normalising for capitalisation and extra spaces. In a small school setting, two students sharing both the same name and age is unlikely, and in that edge case users can simply distinguish them with a note in the name field.
+
+**Import Command:**
+The `import` command was built from scratch with no AB3 equivalent. The main challenge beyond basic CSV parsing was handling duplicates and near-matches — applying the same normalised name matching used in add to flag or skip students who already exist in the system.
+
+**Testing:**
+Adding new fields and commands required expanding the sample test data significantly, which was time-consuming. Optional fields in particular needed careful test coverage to ensure no unintended overwrites or null handling issues.
+
+**Summary:**
+While AB3 provided a foundation, the number of structural changes across the model, parser, storage, and command layers meant that almost every part of the codebase was touched. 
+
+## Appendix: Planned Enhancements
+
+Team Size: 4
+
+### 1. Allow common real-world characters in names
+Currently, the application disallows several commonly used characters in real-world names, 
+including `/`, `-`, `'`, `.`, and non-English characters (e.g., accents). 
+This prevents users from entering valid names such as `Ahmad s/o Rahman`, `Jean-Pierre`, `O'Connor`, 
+`J.R.R. Tolkien`, and `Lê Dũng Tráng`. 
+We plan to update the name validation and parsing logic to support these characters 
+while ensuring they do not conflict with command parsing.
+
+### 2. Provide more specific error message for invalid delete index
+Currently, entering an invalid index for index-based commands (e.g., delete -1 or delete 0) results in a generic "Invalid Command Format" message.
+This does not clearly inform the user what went wrong or how to correct their input.
+We plan to improve the error handling by providing a more specific message, such as:
+* Non-positive indices: "Index must be a positive integer (1, 2, 3...)."
+* Out-of-bounds indices: "The index provided is larger than the number of contacts currently displayed."
+
+### 3. Improve remark display for better readability
+Currently, the remark field accepts an unlimited number of characters, and long remarks are fully displayed in the contact list.
+This can clutter the interface and make it difficult for users to quickly scan and navigate through contacts.
+We plan to improve the display of remarks by constraining them within a fixed-size area and introducing a scrollbar for longer content.
+Additionally, long remarks may be truncated in the list view with an ellipsis (...), while still allowing users to access the full content when needed.
+
+### 4. Relaxing Input Validation for Phone Numbers
+Currently, the application enforces a strict numeric-only format for phone numbers 
+(e.g., rejecting any input containing spaces, brackets, symbols, or text). 
+We plan to relax this "overzealous" validation to allow for more flexible data entry. 
+This will enable users to include context-specific information, 
+such as labelling numbers (e.g., `91234567 (HP)`, `67891234 (Office)`).
+The system will shift from blocking non-compliant inputs to warning the user, 
+ensuring the software remains flexible for various use cases.
+
+### 5. Enhanced Tagging Flexibility
+To better support diverse student categorization needs, 
+we plan to expand the allowed character set for tags. 
+The current alphanumeric-only restriction limits users 
+from using common naming conventions (e.g., `primary-school` or `health_issue`). 
+Future updates will allow for a wider range of special characters, 
+enabling more intuitive and readable tags for Student Care Supervisors.
+
+### 6. Support exact-phrase matching in find command:
+Currently, the find command treats multi-word inputs as separate keyword tokens, 
+which can return broader matches than intended. 
+For example, running `find ad/Blk 123 Geylang Street` returns students whose addresses contain any of the words 
+`Blk`, `123`, `Geylang`, 
+or `Street`, rather than the full phrase. 
+We plan to enhance the find command to support quoted exact-phrase matching, 
+such that inputs enclosed in quotation marks are matched as a contiguous phrase. 
+The existing keyword-based search behaviour will be retained for unquoted inputs.
